@@ -3,17 +3,22 @@
 
 library(dplyr)
 
+#read in the raw data
 data <- readRDS("summarySCC_PM25.rds")
 codes <- readRDS("Source_Classification_Code.rds")
 
+# group data of interest by year
 totalEmissions <- summarize(group_by(data, year), Year = unique(year), Emissions = sum(Emissions))
 
+# to prevent plot() from using scientific notation on the y axis
 options(scipen=5)
 par(mar=c(5,5,4,2))
 
+# to save the resulting plot to a PNG file
 png(file = "plot1.png",
     width = 480, height = 480, units = "px")
 
+# generate barplot
 with(totalEmissions, 
     barplot <- barplot(Emissions/1000~Year, 
         main="Total Emissions by Selected Year \n (1000's of tons)",
@@ -24,4 +29,5 @@ with(totalEmissions,
     )
 )    
 
+# close PNG device
 dev.off()

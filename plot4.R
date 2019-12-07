@@ -29,12 +29,12 @@ png(file = "plot4.png",
 
 # generate barplot
 g <- ggplot(coalEmissions, aes(factor(year), Emissions/1000,
-                                  fill=year, label=round(Emissions,0)))+
+                                  fill=year, label=round(Emissions/1000,0)))+
     geom_col()+
     xlab("Year")+
     ylab(expression("Total PM "[2.5]*" Emissions"))+
     geom_label(color="white", size=3)+
-    ggtitle("Coal-Sourced Emissions in Selected Years \n (1000's of tons)")
+    ggtitle("Coal-Sourced Emissions in Selected Years (1000's of tons)")
 print(g)
 
 # close PNG device
